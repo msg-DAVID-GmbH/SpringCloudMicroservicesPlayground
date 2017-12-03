@@ -31,6 +31,12 @@ public class DemoApplicationListener {
 
         LOG.info("DemoApplicationListener triggered with {}", applicationReadyEvent);
         LOG.info("Now the server is up and we could fill caches and other stuff");
-        LOG.info("Try accessing the HelloController via http://localhost:{}/", env.getProperty("local.server.port"));
+
+        String localServerPort = env.getProperty("local.server.port");
+
+        LOG.info("Try accessing the HelloController via http://localhost:{}/ to see a simple webmvc example",
+                localServerPort);
+        LOG.info("Try accessing the Books controller via http://localhost:{}/books to see a simple Freemarker example " +
+                "displaying data from the hsqldb", localServerPort);
     }
 }
