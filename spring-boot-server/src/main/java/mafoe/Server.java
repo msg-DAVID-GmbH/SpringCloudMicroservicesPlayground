@@ -16,6 +16,7 @@ public class Server {
                 .sources(Server.class)
                 // this is a ridiculously amazing feature
                 .bannerMode(Banner.Mode.CONSOLE)
+                .profiles("populate-db")
                 .run(args);
     }
 }

@@ -3,5 +3,4 @@
 
 spring:
   devtools:
-    restart:
-      true
+    restart: true
