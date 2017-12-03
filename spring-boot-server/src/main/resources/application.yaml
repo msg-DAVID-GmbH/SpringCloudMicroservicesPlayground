@@ -1,0 +1,11 @@
+
+# properties for spring boot
+
+spring:
+  main:
+    # this is a ridiculously ridiculous feature
+    banner-mode:
+      log
+  devtools:
+    restart:
+      true
