@@ -38,5 +38,6 @@ public class DemoApplicationListener {
                 localServerPort);
         LOG.info("Try accessing the Books controller via http://localhost:{}/books to see a simple Freemarker example " +
                 "displaying data from the hsqldb", localServerPort);
+        LOG.info("Or start the JavaFX client via FxClient.java");
     }
 }

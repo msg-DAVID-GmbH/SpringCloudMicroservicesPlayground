@@ -1,8 +1,8 @@
 package mafoe.service;
 
+import mafoe.config.ExposedService;
 import mafoe.dto.BookDto;
 import mafoe.repository.BookRepository;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Implementation of the BookService for the communication with the JavaFX client.
  */
-@Service
+@ExposedService
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;

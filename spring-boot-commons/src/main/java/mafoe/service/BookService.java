@@ -11,7 +11,7 @@ import java.util.List;
  * Service for loading books.
  */
 @Validated
-public interface BookService {
+public interface BookService extends DemoService {
 
     /**
      * Loads all books, sorted by author and name.
