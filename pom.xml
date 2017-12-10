@@ -17,7 +17,29 @@
 
     <modules>
         <module>spring-boot-server</module>
+        <module>spring-boot-fx-client</module>
+        <module>spring-boot-commons</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>mafoe</groupId>
+                <artifactId>spring-boot-commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mafoe</groupId>
+                <artifactId>spring-boot-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mafoe</groupId>
+                <artifactId>spring-boot-fx-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <properties>
         <java.version>1.8</java.version>

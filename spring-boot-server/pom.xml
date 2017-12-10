@@ -5,6 +5,7 @@
 
     <artifactId>spring-boot-server</artifactId>
     <modelVersion>4.0.0</modelVersion>
+    <description>A web application server project for the spring-boot demo</description>
 
     <parent>
         <groupId>mafoe</groupId>
@@ -37,6 +38,15 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>0.14</version>
+        </dependency>
+        <dependency>
+            <groupId>mafoe</groupId>
+            <artifactId>spring-boot-commons</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

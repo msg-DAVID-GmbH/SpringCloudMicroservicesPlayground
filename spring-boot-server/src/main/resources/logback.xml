@@ -8,7 +8,10 @@
         </encoder>
     </appender>
 
+    <!-- Logs incoming service calls via the Spring HTTP invoker -->
+    <logger name="org.springframework.remoting.support.RemoteInvocationTraceInterceptor" level="DEBUG"/>
+
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

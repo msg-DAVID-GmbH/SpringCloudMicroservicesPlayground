@@ -1,5 +1,6 @@
 package mafoe.repository;
 
+import mafoe.dto.BookDto;
 import mafoe.entity.Book;
 import mafoe.freemarker.FreemarkerBook;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +19,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT NEW mafoe.freemarker.FreemarkerBook(b.author.name, b.title) " +
             "FROM Book b " +
             "ORDER BY b.author.name")
-    List<FreemarkerBook> findBooks();
+    List<FreemarkerBook> findBooksForFreemarker();
+
+    /**
+     * Light weight query to get all books and their authors.
+     */
+    @Query("SELECT NEW mafoe.dto.BookDto(b.author.name, b.title) " +
+            "FROM Book b " +
+            "ORDER BY b.author.name")
+    List<BookDto> findBooks();
 }

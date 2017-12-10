@@ -1,5 +1,8 @@
 package mafoe;
 
+import com.github.javafaker.Faker;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import mafoe.entity.Author;
 import mafoe.entity.Book;
 import mafoe.repository.AuthorRepository;
@@ -11,7 +14,9 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * From the spring boot docs:
@@ -40,18 +45,27 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
 
         LOG.info("DatabasePopulatorCLR is trying to populate the database with some test data");
 
-        Author steinbeck = new Author("John Steinbeck");
-        Author duerrenmatt = new Author("Friedrich Dürrenmatt");
-        authorRepository.save(Arrays.asList(steinbeck, duerrenmatt));
+        //let's fake some data
 
-        Book eastOfEden = new Book("East of Eden", steinbeck);
-        Book ofMiceAndMen = new Book("Of Mice and Men", steinbeck);
+        Multimap<String, String> authorBookMap = HashMultimap.create();
 
-        Book richter = new Book("Der Richter und sein Henker", duerrenmatt);
-        Book verdacht = new Book("Der Verdacht", duerrenmatt);
+        Faker faker = new Faker();
+        Stream.generate(faker::book).limit(500).forEach(book -> authorBookMap.put(book.author(), book.title()));
 
-        bookRepository.save(Arrays.asList(eastOfEden, ofMiceAndMen, richter, verdacht));
+        for (Map.Entry<String, Collection<String>> entry : authorBookMap.asMap().entrySet()) {
 
-        LOG.info("Created 2 authors and 4 books");
+            String authorName = entry.getKey();
+            Collection<String> books = entry.getValue();
+
+            Author author = new Author(authorName);
+            authorRepository.save(author);
+
+            for (String title : books) {
+                Book book = new Book(title, author);
+                bookRepository.save(book);
+            }
+        }
+
+        LOG.info("Created {} authors and {} books", authorRepository.count(), bookRepository.count());
     }
 }

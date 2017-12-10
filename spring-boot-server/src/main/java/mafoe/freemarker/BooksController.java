@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.transaction.Transactional;
 
+/**
+ * Spring WebMVC controller for Freemarker.
+ */
 @Controller
 public class BooksController {
 
@@ -21,8 +24,7 @@ public class BooksController {
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String books(Model model) {
 
-        model.addAttribute("books", bookRepository.findBooks());
+        model.addAttribute("books", bookRepository.findBooksForFreemarker());
         return "books";
     }
-
 }
