@@ -1,8 +1,8 @@
 package mafoe.config;
 
 import javafx.util.Pair;
-import mafoe.DemoApplicationListener;
 import mafoe.service.DemoService;
+import mafoe.util.RemotingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -34,12 +34,12 @@ import java.util.Set;
 @Component
 public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostProcessor {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DemoApplicationListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExposeServicePostProcessor.class);
 
     /**
      * Marker interface required for determining the endpoint name of the HttpInvokerServiceExporter.
      */
-    private static final Class<DemoService> MARKER_INTERFACE_CLASS = DemoService.class;
+    private static final Class<?> MARKER_INTERFACE_CLASS = DemoService.class;
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
@@ -77,7 +77,7 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
 
         String serviceImplementationBeanName = pair.getKey();
         BeanDefinition serviceImplementationBeanDefinition = pair.getValue();
-        Class<?> serviceInterfaceClass = findMarkerInterface(serviceImplementationBeanDefinition);
+        Class<? extends DemoService> serviceInterfaceClass = findMarkerInterface(serviceImplementationBeanDefinition);
 
         if (serviceInterfaceClass == null) {
             LOG.warn("Service {} was annotated with @ExposedService, but does not implement an interface derived from" +
@@ -92,7 +92,7 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
                 .addPropertyValue("serviceInterface", serviceInterfaceClass)
                 .getBeanDefinition();
 
-        String httpExporterBeanName = serviceInterfaceToEndpoint(serviceInterfaceClass);
+        String httpExporterBeanName = RemotingHelper.serviceInterfaceToEndpoint(serviceInterfaceClass);
         if (registry.containsBeanDefinition(httpExporterBeanName)) {
             LOG.warn("While trying to expose the service bean '{}' via an HttpInvokerServiceExporter with the name {},"
                             + " a bean with that name was already defined: {}", serviceImplementationBeanName,
@@ -104,14 +104,14 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
         }
     }
 
-    private Class<?> findMarkerInterface(BeanDefinition serviceImplementationBeanDefinition) {
+    private Class<? extends DemoService> findMarkerInterface(BeanDefinition serviceImplementationBeanDefinition) {
 
         try {
             Class<?> serviceImplementationClass = Class.forName(serviceImplementationBeanDefinition.getBeanClassName());
             Set<Class<?>> interfaces = ClassUtils.getAllInterfacesForClassAsSet(serviceImplementationClass);
             for (Class<?> anInterface : interfaces) {
                 if (MARKER_INTERFACE_CLASS.isAssignableFrom(anInterface) && !anInterface.equals(MARKER_INTERFACE_CLASS)) {
-                    return anInterface;
+                    return (Class<? extends DemoService>) anInterface;
                 }
             }
             return null;
@@ -121,11 +121,6 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
             return null;
         }
     }
-
-    private String serviceInterfaceToEndpoint(Class<?> serviceInterfaceClass) {
-        return "/" + serviceInterfaceClass.getSimpleName();
-    }
-
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {

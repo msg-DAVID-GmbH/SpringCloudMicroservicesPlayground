@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import mafoe.SpringContext;
+import mafoe.config.SpringContext;
 import mafoe.dto.BookDto;
 import mafoe.service.BookService;
 

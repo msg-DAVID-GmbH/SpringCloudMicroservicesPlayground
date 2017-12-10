@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mafoe.config.DemoApplicationContextInitializer;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -27,6 +28,7 @@ public class FxClient extends Application {
                 .sources(FxClient.class)
                 // this is a ridiculously amazing feature
                 .bannerMode(Banner.Mode.CONSOLE)
+                .initializers(new DemoApplicationContextInitializer())
                 .run();
 
         ClassPathResource cpr = new ClassPathResource("mafoe/controller/ShowBooks.fxml");
