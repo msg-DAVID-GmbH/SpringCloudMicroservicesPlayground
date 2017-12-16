@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/martinfoersterling/spring-boot.svg?branch=master)](https://travis-ci.org/martinfoersterling/spring-boot)
-
-# spring-boot
+# spring-boot [![Build Status](https://travis-ci.org/martinfoersterling/spring-boot.svg?branch=master)](https://travis-ci.org/martinfoersterling/spring-boot)
 
 Testing and playing around with spring-boot 1.5.9.
 
