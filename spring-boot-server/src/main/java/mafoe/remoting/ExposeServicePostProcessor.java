@@ -1,4 +1,4 @@
-package mafoe.config;
+package mafoe.remoting;
 
 import javafx.util.Pair;
 import mafoe.service.DemoService;
@@ -90,6 +90,7 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
                 .genericBeanDefinition(HttpInvokerServiceExporter.class.getName())
                 .addPropertyReference("service", serviceImplementationBeanName)
                 .addPropertyValue("serviceInterface", serviceInterfaceClass)
+                .addPropertyValue("remoteInvocationExecutor", new CustomRemoteInvocationExecutor())
                 .getBeanDefinition();
 
         String httpExporterBeanName = RemotingHelper.serviceInterfaceToEndpoint(serviceInterfaceClass);

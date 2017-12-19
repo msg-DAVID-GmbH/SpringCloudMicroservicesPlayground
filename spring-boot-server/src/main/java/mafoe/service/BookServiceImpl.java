@@ -1,7 +1,7 @@
 package mafoe.service;
 
-import mafoe.config.ExposedService;
 import mafoe.dto.BookDto;
+import mafoe.remoting.ExposedService;
 import mafoe.repository.BookRepository;
 
 import javax.transaction.Transactional;

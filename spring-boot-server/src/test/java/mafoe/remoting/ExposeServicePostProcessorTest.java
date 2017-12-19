@@ -1,4 +1,4 @@
-package mafoe.config;
+package mafoe.remoting;
 
 import mafoe.service.DemoService;
 import org.junit.Test;
@@ -26,8 +26,10 @@ public class ExposeServicePostProcessorTest {
 
     @Autowired
     private ApplicationContext applicationContext;
+
     @Autowired
     private TestService implementation;
+
     @Qualifier("/NameAlreadyTakenService")
     @Autowired
     private Object nameAlreadyTakenService;

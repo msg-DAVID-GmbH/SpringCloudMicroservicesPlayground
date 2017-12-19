@@ -25,7 +25,6 @@ public class DemoApplicationListener {
         this.env = env;
     }
 
-
     @EventListener
     public void doStuffWhenServerIsUp(ApplicationReadyEvent applicationReadyEvent) {
 

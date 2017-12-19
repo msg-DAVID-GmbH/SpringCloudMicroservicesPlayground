@@ -1,44 +1,45 @@
-package mafoe.config;
+package mafoe.remoting;
 
 import mafoe.service.DemoService;
 import mafoe.util.RemotingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean;
-import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
 /**
  * Connects the client with a number of exposed services via HttpInvokerProxyFactoryBean, using Spring HTTP invoker.
  */
-public abstract class AbstractWireServicesPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public abstract class AbstractConsumeServicesPostProcessor implements BeanDefinitionRegistryPostProcessor, EnvironmentAware {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractWireServicesPostProcessor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractConsumeServicesPostProcessor.class);
+    private Environment environment;
 
     protected abstract Set<Class<? extends DemoService>> getServiceInterfaces();
 
-    private ConfigurableEnvironment springEnvironment;
-
-    protected AbstractWireServicesPostProcessor(ConfigurableEnvironment springEnvironment) {
-        this.springEnvironment = springEnvironment;
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 
-        String serverUrl = springEnvironment.getProperty("demo.server.url");
-        getServiceInterfaces().forEach(serviceInterface -> wireService(serviceInterface, registry, serverUrl));
+        String serverUrl = environment.getProperty("demo.server.url");
+        getServiceInterfaces().forEach(serviceInterface -> consumeService(serviceInterface, registry, serverUrl));
     }
 
-    private void wireService(Class<? extends DemoService> serviceInterface, BeanDefinitionRegistry registry, String serverUrl) {
+    private void consumeService(Class<? extends DemoService> serviceInterface, BeanDefinitionRegistry registry, String serverUrl) {
 
         String endpointUrl = serverUrl + RemotingHelper.serviceInterfaceToEndpoint(serviceInterface);
 
@@ -46,9 +47,10 @@ public abstract class AbstractWireServicesPostProcessor implements BeanDefinitio
                 .genericBeanDefinition(HttpInvokerProxyFactoryBean.class.getName())
                 .addPropertyValue("serviceUrl", endpointUrl)
                 .addPropertyValue("serviceInterface", serviceInterface)
+                .setRole(BeanDefinition.ROLE_INFRASTRUCTURE)
                 .getBeanDefinition();
 
-        String proxyBeanName = StringUtils.uncapitalize(serviceInterface.getSimpleName());
+        String proxyBeanName = RemotingHelper.serviceInterfaceToEndpoint(serviceInterface);
         if (registry.containsBeanDefinition(proxyBeanName)) {
             LOG.warn("While trying to register a proxy with the name {} for the endpoint {}, "
                             + " a bean with that name was already defined: {}",
@@ -56,7 +58,7 @@ public abstract class AbstractWireServicesPostProcessor implements BeanDefinitio
                     endpointUrl,
                     registry.getBeanDefinition(proxyBeanName));
         } else {
-            LOG.info("Wiring proxy {} to the endpoint {}", proxyBeanName, endpointUrl);
+            LOG.info("Consuming a service at the endpoint {} via the proxy bean {}", endpointUrl, proxyBeanName);
             registry.registerBeanDefinition(proxyBeanName, proxyDefinition);
         }
     }

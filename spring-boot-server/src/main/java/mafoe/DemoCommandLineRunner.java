@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DemoCommandLineRunner implements CommandLineRunner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DemoApplicationListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DemoCommandLineRunner.class);
 
     public void run(String... args) {
 

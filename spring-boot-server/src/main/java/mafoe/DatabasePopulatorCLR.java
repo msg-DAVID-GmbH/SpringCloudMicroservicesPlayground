@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 @Component
 public class DatabasePopulatorCLR implements CommandLineRunner {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DemoApplicationListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DatabasePopulatorCLR.class);
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;

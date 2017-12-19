@@ -1,4 +1,4 @@
-package mafoe.config;
+package mafoe.remoting;
 
 import org.springframework.stereotype.Service;
 
