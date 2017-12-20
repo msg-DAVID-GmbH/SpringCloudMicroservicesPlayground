@@ -6,11 +6,15 @@ import mafoe.freemarker.FreemarkerBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.util.List;
+
+import static javax.transaction.Transactional.TxType.MANDATORY;
 
 /**
  * Spring Data JPA repository for Book entities.
  */
+@Transactional(MANDATORY)
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     /**

@@ -3,8 +3,8 @@ package mafoe.service;
 import mafoe.dto.BookDto;
 import mafoe.remoting.ExposedService;
 import mafoe.repository.BookRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class BookServiceImpl implements BookService {
         this.bookRepository = bookRepository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<BookDto> loadAllBooks() {
         return bookRepository.findBooks();
