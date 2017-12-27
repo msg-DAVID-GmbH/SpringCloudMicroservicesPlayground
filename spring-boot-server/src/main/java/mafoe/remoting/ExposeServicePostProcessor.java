@@ -1,7 +1,6 @@
 package mafoe.remoting;
 
 import javafx.util.Pair;
-import mafoe.service.DemoService;
 import mafoe.util.RemotingHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,8 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.springframework.stereotype.Component;
@@ -32,17 +33,16 @@ import java.util.Set;
  * "/BookService" to expose the service implementation for the Spring HTTP invoker mechanism.
  */
 @Component
-public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostProcessor, ApplicationContextAware {
 
     private static final Logger LOG = LoggerFactory.getLogger(ExposeServicePostProcessor.class);
 
-    /**
-     * Marker interface required for determining the endpoint name of the HttpInvokerServiceExporter.
-     */
-    private static final Class<?> MARKER_INTERFACE_CLASS = DemoService.class;
+    private ApplicationContext applicationContext;
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+
+        checkForExposedServiceConfiguration();
 
         //iterate over all known beans
         Arrays.stream(registry.getBeanDefinitionNames())
@@ -77,12 +77,13 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
 
         String serviceImplementationBeanName = pair.getKey();
         BeanDefinition serviceImplementationBeanDefinition = pair.getValue();
-        Class<? extends DemoService> serviceInterfaceClass = findMarkerInterface(serviceImplementationBeanDefinition);
+        ExposedServiceConfiguration configuration = applicationContext.getBean(ExposedServiceConfiguration.class);
+        Class<?> serviceInterfaceClass = findMarkerInterface(serviceImplementationBeanDefinition, configuration);
 
         if (serviceInterfaceClass == null) {
             LOG.warn("Service {} was annotated with @ExposedService, but does not implement an interface derived from" +
                             " the required marker interface {}",
-                    serviceImplementationBeanName, MARKER_INTERFACE_CLASS.getName());
+                    serviceImplementationBeanName, configuration.getMarkerInterface().getName());
             return;
         }
 
@@ -105,14 +106,16 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
         }
     }
 
-    private Class<? extends DemoService> findMarkerInterface(BeanDefinition serviceImplementationBeanDefinition) {
+    private Class<?> findMarkerInterface(BeanDefinition serviceImplementationBeanDefinition,
+                                         ExposedServiceConfiguration configuration) {
 
         try {
             Class<?> serviceImplementationClass = Class.forName(serviceImplementationBeanDefinition.getBeanClassName());
             Set<Class<?>> interfaces = ClassUtils.getAllInterfacesForClassAsSet(serviceImplementationClass);
             for (Class<?> anInterface : interfaces) {
-                if (MARKER_INTERFACE_CLASS.isAssignableFrom(anInterface) && !anInterface.equals(MARKER_INTERFACE_CLASS)) {
-                    return (Class<? extends DemoService>) anInterface;
+                if (configuration.getMarkerInterface().isAssignableFrom(anInterface)
+                        && !anInterface.equals(configuration.getMarkerInterface())) {
+                    return anInterface;
                 }
             }
             return null;
@@ -123,8 +126,23 @@ public class ExposeServicePostProcessor implements BeanDefinitionRegistryPostPro
         }
     }
 
+    private void checkForExposedServiceConfiguration() {
+
+        ExposedServiceConfiguration configuration = applicationContext.getBean(ExposedServiceConfiguration.class);
+
+        if (configuration.getMarkerInterface() == null) {
+            throw new RuntimeException("The bean implementing ExposedServiceConfiguration did not return a marker " +
+                    "interface class");
+        }
+    }
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         // do nothing
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
     }
 }

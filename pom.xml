@@ -38,6 +38,12 @@
                 <artifactId>spring-boot-fx-client</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>de.schauderhaft.degraph</groupId>
+                <artifactId>degraph-check</artifactId>
+                <version>0.1.4</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

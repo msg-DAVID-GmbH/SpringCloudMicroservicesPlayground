@@ -1,6 +1,5 @@
 package mafoe.remoting;
 
-import mafoe.service.DemoService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -71,6 +70,11 @@ public class ExposeServicePostProcessorTest {
         String nameAlreadyTaken() {
             return "";
         }
+
+        @Bean
+        ExposedServiceConfiguration exposedServiceConfiguration() {
+            return () -> MarkerInterface.class;
+        }
     }
 
     /**
@@ -81,7 +85,11 @@ public class ExposeServicePostProcessorTest {
 
     }
 
-    private interface TestService extends DemoService {
+    private interface TestService extends MarkerInterface {
+
+    }
+
+    private interface MarkerInterface {
 
     }
 
@@ -105,7 +113,7 @@ public class ExposeServicePostProcessorTest {
 
     }
 
-    private interface NameAlreadyTakenService extends DemoService {
+    private interface NameAlreadyTakenService extends MarkerInterface {
 
     }
 }

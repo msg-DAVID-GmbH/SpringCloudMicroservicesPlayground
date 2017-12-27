@@ -1,4 +1,4 @@
-package mafoe.freemarker;
+package mafoe.repository.struct;
 
 /**
  * POJO Model for Freemarker representing a book.
