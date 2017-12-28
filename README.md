@@ -1,4 +1,4 @@
-# spring-boot [![Build Status](https://travis-ci.org/martinfoersterling/spring-boot.svg?branch=master)](https://travis-ci.org/martinfoersterling/spring-boot)[![codecov](https://codecov.io/gh/martinfoersterling/spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-boot)
+# spring-boot [![Build Status](https://travis-ci.org/martinfoersterling/spring-boot.svg?branch=master)](https://travis-ci.org/martinfoersterling/spring-boot) [![codecov](https://codecov.io/gh/martinfoersterling/spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-boot)
 
 Testing and playing around with spring-boot 1.5.9.
 
