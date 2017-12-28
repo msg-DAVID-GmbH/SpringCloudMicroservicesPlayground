@@ -1,7 +1,7 @@
 package mafoe.service;
 
+import mafoe.autoremote.server.remoting.ExposedService;
 import mafoe.dto.BookDto;
-import mafoe.remoting.ExposedService;
 import mafoe.repository.BookRepository;
 import org.springframework.transaction.annotation.Transactional;
 

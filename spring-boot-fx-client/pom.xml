@@ -14,10 +14,9 @@
     </parent>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
+            <artifactId>spring-boot-autoremote-client-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>mafoe</groupId>

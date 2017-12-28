@@ -21,6 +21,13 @@
         <module>spring-boot-commons</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
@@ -40,6 +47,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
+                <artifactId>spring-boot-autoremote-server-starter</artifactId>
+                <version>${spring-boot-autoremote.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
+                <artifactId>spring-boot-autoremote-client-starter</artifactId>
+                <version>${spring-boot-autoremote.version}</version>
+            </dependency>
             <dependency>
                 <groupId>mafoe</groupId>
                 <artifactId>spring-boot-commons</artifactId>
@@ -66,5 +83,6 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-boot-autoremote.version>1.2</spring-boot-autoremote.version>
     </properties>
 </project>

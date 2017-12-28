@@ -1,6 +1,6 @@
 package mafoe.config;
 
-import mafoe.remoting.ExposedServiceConfiguration;
+import mafoe.autoremote.server.remoting.ExposedServiceConfiguration;
 import mafoe.service.DemoService;
 import org.springframework.stereotype.Component;
 

@@ -43,6 +43,10 @@
             <artifactId>hamcrest-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
+            <artifactId>spring-boot-autoremote-server-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>de.schauderhaft.degraph</groupId>
             <artifactId>degraph-check</artifactId>
         </dependency>
