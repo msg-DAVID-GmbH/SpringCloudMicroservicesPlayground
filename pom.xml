@@ -7,7 +7,7 @@
     <groupId>mafoe</groupId>
     <artifactId>spring-boot</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
