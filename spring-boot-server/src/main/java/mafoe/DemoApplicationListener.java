@@ -36,7 +36,7 @@ public class DemoApplicationListener {
         LOG.info("Try accessing the HelloController via http://localhost:{}/ to see a simple webmvc example",
                 localServerPort);
         LOG.info("Try accessing the Books controller via http://localhost:{}/books to see a simple Freemarker example " +
-                "displaying data from the hsqldb", localServerPort);
+                "displaying data from the database", localServerPort);
         LOG.info("Or start the JavaFX client via FxClient.java");
     }
 }

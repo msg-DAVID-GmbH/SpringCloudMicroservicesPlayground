@@ -1,0 +1,10 @@
+
+# properties for h2 profile
+# if h2 profile is set, then this file is used in addition to application.yaml
+
+spring:
+  datasource:
+    url: jdbc:h2:file:~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
