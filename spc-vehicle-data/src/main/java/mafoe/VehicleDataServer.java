@@ -8,12 +8,12 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * Web application server.
  */
 @SpringBootApplication
-public class Server {
+public class VehicleDataServer {
 
     public static void main(String[] args) {
 
         new SpringApplicationBuilder()
-                .sources(Server.class)
+                .sources(VehicleDataServer.class)
                 // this is a ridiculously amazing feature
                 .bannerMode(Banner.Mode.CONSOLE)
                 .profiles("populate-db")

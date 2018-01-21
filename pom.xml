@@ -18,6 +18,7 @@
     <modules>
         <module>spc-vehicle-data</module>
         <module>spc-config-server</module>
+        <module>spc-eureka-server</module>
     </modules>
 
     <repositories>
@@ -49,7 +50,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Edgware.RELEASE</version>
+                <version>Edgware.SR1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
