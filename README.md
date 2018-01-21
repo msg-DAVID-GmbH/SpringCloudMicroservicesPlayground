@@ -1,4 +1,4 @@
-# spring-cloud-microservices [![Build Status](https://travis-ci.org/martinfoersterling/spring-cloud-microservices.svg?branch=develop)](https://travis-ci.org/martinfoersterling/spring-boot) [![codecov](https://codecov.io/gh/martinfoersterling/spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-cloud-microservices)
+# spring-cloud-microservices [![Build Status](https://travis-ci.org/martinfoersterling/spring-cloud-microservices.svg?branch=develop)](https://travis-ci.org/martinfoersterling/spring-cloud-microservices) [![codecov](https://codecov.io/gh/martinfoersterling/spring-cloud-microservices/branch/develop/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-cloud-microservices)
 
 Playground for building microservices with spring-boot and spring-cloud.
 
