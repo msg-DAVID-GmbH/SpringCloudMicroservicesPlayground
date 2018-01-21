@@ -1,4 +1,4 @@
-package mafoe;
+package mafoe.spc.config.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
  * </p>
  */
 @Component
-public class DemoApplicationListener {
+public class PrintInfoApplicationListener {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DemoApplicationListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PrintInfoApplicationListener.class);
     private final Environment env;
 
-    public DemoApplicationListener(Environment env) {
+    public PrintInfoApplicationListener(Environment env) {
         //don't even need to put @Autowired on this constructor because it's the only one
         this.env = env;
     }
@@ -28,14 +28,10 @@ public class DemoApplicationListener {
     @EventListener
     public void doStuffWhenServerIsUp(ApplicationReadyEvent applicationReadyEvent) {
 
-        LOG.info("DemoApplicationListener triggered with {}", applicationReadyEvent);
-        LOG.info("Now the server is up and we could fill caches and other stuff");
-
         String localServerPort = env.getProperty("local.server.port");
 
-        LOG.info("Try accessing the HelloController via http://localhost:{}/ to see a simple webmvc example",
-                localServerPort);
-        LOG.info("Try accessing the Books controller via http://localhost:{}/books to see a simple Freemarker example " +
-                "displaying data from the database", localServerPort);
+        LOG.info("Configurations (.ymls) can be retrieved like this http://localhost:{}/vehicle-data.yml", localServerPort);
+        LOG.info("...or this http://localhost:{}/eureka-server.properties", localServerPort);
+        LOG.info("...or with profiles and labels, see http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.4.1.RELEASE/single/spring-cloud-config.html", localServerPort);
     }
 }
