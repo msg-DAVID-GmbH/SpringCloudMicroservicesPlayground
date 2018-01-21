@@ -19,6 +19,7 @@
         <module>spc-vehicle-data</module>
         <module>spc-config-server</module>
         <module>spc-eureka-server</module>
+        <module>spc-brand-webservice</module>
     </modules>
 
     <repositories>

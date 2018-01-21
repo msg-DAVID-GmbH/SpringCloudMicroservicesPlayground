@@ -3,10 +3,12 @@ package mafoe;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * Web application server.
  */
+@EnableEurekaClient
 @SpringBootApplication
 public class VehicleDataServer {
 

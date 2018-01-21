@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: brand-webservice
+  cloud:
+      config:
+        uri: http://localhost:8888
