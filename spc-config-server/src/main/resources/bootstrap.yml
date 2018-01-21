@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: config-server
+
+  cloud:
+    config:
+      server:
+        git:
+# While in development mode, you can configure the config server to pick up configuration files from the file system
+# uri: file://
+          uri: https://github.com/martinfoersterling/spring-cloud-microservices-config.git

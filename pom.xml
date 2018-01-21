@@ -17,6 +17,7 @@
 
     <modules>
         <module>spc-vehicle-data</module>
+        <module>spc-config-server</module>
     </modules>
 
     <repositories>
@@ -45,6 +46,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>mafoe</groupId>
                 <artifactId>spring-boot-server</artifactId>
