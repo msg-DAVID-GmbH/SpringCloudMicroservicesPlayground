@@ -3,14 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <artifactId>spring-boot-server</artifactId>
+    <artifactId>spc-vehicle-data</artifactId>
     <modelVersion>4.0.0</modelVersion>
-    <description>A web application server project for the spring-boot demo</description>
+    <description>A server administrating vehicle data against a relational database</description>
 
     <parent>
         <groupId>mafoe</groupId>
-        <artifactId>spring-boot</artifactId>
-        <version>1.1-SNAPSHOT</version>
+        <artifactId>spring-cloud-microservices</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -39,24 +39,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
-            <artifactId>spring-boot-autoremote-server-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.schauderhaft.degraph</groupId>
-            <artifactId>degraph-check</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mafoe</groupId>
-            <artifactId>spring-boot-commons</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

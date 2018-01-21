@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>mafoe</groupId>
-    <artifactId>spring-boot</artifactId>
+    <artifactId>spring-cloud-microservices</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,9 +16,7 @@
     </parent>
 
     <modules>
-        <module>spring-boot-server</module>
-        <module>spring-boot-fx-client</module>
-        <module>spring-boot-commons</module>
+        <module>spc-vehicle-data</module>
     </modules>
 
     <repositories>
@@ -48,40 +46,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
-                <artifactId>spring-boot-autoremote-server-starter</artifactId>
-                <version>${spring-boot-autoremote.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.martinfoersterling.spring-boot-autoremote</groupId>
-                <artifactId>spring-boot-autoremote-client-starter</artifactId>
-                <version>${spring-boot-autoremote.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>mafoe</groupId>
-                <artifactId>spring-boot-commons</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>mafoe</groupId>
                 <artifactId>spring-boot-server</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>mafoe</groupId>
-                <artifactId>spring-boot-fx-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.schauderhaft.degraph</groupId>
-                <artifactId>degraph-check</artifactId>
-                <version>0.1.4</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.github.javafaker</groupId>
                 <artifactId>javafaker</artifactId>
                 <version>0.14</version>
+            </dependency>
+           <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>23.5-jre</version>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
@@ -94,6 +71,5 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-boot-autoremote.version>1.4</spring-boot-autoremote.version>
     </properties>
 </project>

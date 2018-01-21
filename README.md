@@ -1,19 +1,15 @@
-# spring-boot [![Build Status](https://travis-ci.org/martinfoersterling/spring-boot.svg?branch=master)](https://travis-ci.org/martinfoersterling/spring-boot) [![codecov](https://codecov.io/gh/martinfoersterling/spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-boot)
+# spring-cloud-microservices [![Build Status](https://travis-ci.org/martinfoersterling/spring-cloud-microservices.svg?branch=develop)](https://travis-ci.org/martinfoersterling/spring-boot) [![codecov](https://codecov.io/gh/martinfoersterling/spring-boot/branch/master/graph/badge.svg)](https://codecov.io/gh/martinfoersterling/spring-cloud-microservices)
 
-Testing and playing around with spring-boot 1.5.9.
-
-Start Server.java to launch an embedded tomcat with the server application.
-
-Start FxClient.java to launch a JavaFX client application to communicate with the server via Spring HTTP Invoker.
-
-Access http://localhost:8080/ to see a tiny Web MVC demo.
-
-Access http://localhost:8080/books to see a Freemarker controller displaying the database content.
+Playground for building microservices with spring-boot and spring-cloud.
 
 # Materials
 
-https://github.com/spring-projects/spring-boot
+https://github.com/anilallewar/microservices-basics-spring-boot
 
-https://docs.spring.io/spring-boot/docs/1.5.9.RELEASE/reference/htmlsingle/
+https://swagger.io/
 
-https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+https://spring.io/blog/2015/07/14/microservices-with-spring
+
+https://github.com/paulc4/microservices-demo
+
+https://jaxenter.com/spring-boot-tutorial-rest-services-and-microservices-135148.html

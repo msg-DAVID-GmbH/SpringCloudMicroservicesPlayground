@@ -1,9 +1,0 @@
-
-demo:
-  server:
-    url: http://localhost:8080
-
-# disable the spring boot banner on startup
-spring:
-  main:
-    banner-mode: "off"
