@@ -8,3 +8,5 @@ server:
 logging:
   level:
     org.springframework.cloud: 'DEBUG'
+  pattern:
+    console: "%d{HH:mm:ss} %clr(%.-1level) %msg%n"

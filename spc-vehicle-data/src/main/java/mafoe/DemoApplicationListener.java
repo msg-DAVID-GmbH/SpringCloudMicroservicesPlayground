@@ -33,9 +33,9 @@ public class DemoApplicationListener {
 
         String localServerPort = env.getProperty("local.server.port");
 
-        LOG.info("Try accessing the HelloController via http://localhost:{}/ to see a simple webmvc example",
+        LOG.info("Try accessing the HelloController via http://localhost:{}/vehicle-data/ to see a simple webmvc example",
                 localServerPort);
-        LOG.info("Try accessing the Books controller via http://localhost:{}/books to see a simple Freemarker example " +
+        LOG.info("Try accessing the Books controller via http://localhost:{}/vehicle-data/books to see a simple Freemarker example " +
                 "displaying data from the database", localServerPort);
     }
 }
