@@ -16,9 +16,7 @@ public class VehicleDataServer {
 
         new SpringApplicationBuilder()
                 .sources(VehicleDataServer.class)
-                // this is a ridiculously amazing feature
-                .bannerMode(Banner.Mode.CONSOLE)
+                .bannerMode(Banner.Mode.OFF)
                 .profiles("populate-db")
-                .run(args);
-    }
+                .run(args);    }
 }

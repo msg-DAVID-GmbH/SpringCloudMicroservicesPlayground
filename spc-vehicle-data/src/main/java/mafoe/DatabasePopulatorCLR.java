@@ -3,10 +3,8 @@ package mafoe;
 import com.github.javafaker.Faker;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import mafoe.entity.Author;
-import mafoe.entity.Book;
-import mafoe.repository.AuthorRepository;
-import mafoe.repository.BookRepository;
+import mafoe.entity.Order;
+import mafoe.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -32,12 +30,10 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(DatabasePopulatorCLR.class);
 
-    private final BookRepository bookRepository;
-    private final AuthorRepository authorRepository;
+    private final OrderRepository orderRepository;
 
-    public DatabasePopulatorCLR(BookRepository bookRepository, AuthorRepository authorRepository) {
-        this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
+    public DatabasePopulatorCLR(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
     @Transactional
@@ -45,7 +41,7 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
 
         LOG.info("DatabasePopulatorCLR is trying to populate the database with some test data");
 
-        //let's fake some data
+        //call the brand webservice
 
         Multimap<String, String> authorBookMap = HashMultimap.create();
 
@@ -57,15 +53,13 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
             String authorName = entry.getKey();
             Collection<String> books = entry.getValue();
 
-            Author author = new Author(authorName);
-            authorRepository.save(author);
+            Order order = new Order(authorName);
+            orderRepository.save(order);
 
             for (String title : books) {
-                Book book = new Book(title, author);
-                bookRepository.save(book);
             }
         }
 
-        LOG.info("Created {} authors and {} books", authorRepository.count(), bookRepository.count());
+        LOG.info("Created {} authors and {} books", orderRepository.count(), bookRepository.count());
     }
 }
