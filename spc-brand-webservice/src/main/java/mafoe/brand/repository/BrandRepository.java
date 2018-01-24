@@ -4,6 +4,7 @@ import mafoe.brand.model.Brand;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public interface BrandRepository {
@@ -16,5 +17,5 @@ public interface BrandRepository {
 
     void delete(String brand);
 
-    Brand findOne(String brand);
+    Optional<Brand> findOne(String brand);
 }

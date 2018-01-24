@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/brands")
 @RestController
@@ -25,6 +26,15 @@ public class BrandService {
     @RequestMapping(method = RequestMethod.GET, headers = "Accept=application/json")
     public List<Brand> getBrands() {
         return new ArrayList<>(brandRepository.findAll().values());
+    }
+
+    /**
+     * @return whether a brand's data should be publicly visible.
+     */
+    @RequestMapping(path = "public", method = RequestMethod.GET, headers = "Accept=application/json")
+    public boolean isPublic(String brand) {
+        Optional<Brand> optionalBrand = brandRepository.findOne(brand);
+        return optionalBrand.isPresent() && optionalBrand.get().isPublic();
     }
 
 }

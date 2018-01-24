@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 /**
  * From the spring boot docs:
@@ -43,7 +44,7 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
         ClassPathResource cpr = new ClassPathResource("brands.txt");
         List<String> brandNames = Files.readLines(cpr.getFile(), Charsets.UTF_8);
 
-        brandNames.forEach(brandName -> brandRepository.add(new Brand(brandName)));
+        brandNames.forEach(brandName -> brandRepository.add(new Brand(brandName, new Random().nextBoolean())));
 
         LOG.info("Created {} brands", brandRepository.count());
     }
