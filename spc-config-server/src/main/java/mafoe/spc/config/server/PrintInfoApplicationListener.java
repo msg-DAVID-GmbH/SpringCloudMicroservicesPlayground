@@ -33,5 +33,7 @@ public class PrintInfoApplicationListener {
         LOG.info("Configurations (.ymls) can be retrieved like this http://localhost:{}/vehicle-data.yml", localServerPort);
         LOG.info("...or this http://localhost:{}/eureka-server.properties", localServerPort);
         LOG.info("...or with profiles and labels, see http://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.4.1.RELEASE/single/spring-cloud-config.html", localServerPort);
+        LOG.error("######## You might have to set proxy settings as VM options to get this to work: -Dhttps.proxyHost=????? -Dhttps.proxyPort=????");
+
     }
 }
