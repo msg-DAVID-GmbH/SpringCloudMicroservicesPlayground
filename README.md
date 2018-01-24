@@ -4,7 +4,7 @@ Playground for building microservices with spring-boot and spring-cloud.
 
 # Materials
 
-Many thanks to @mention anilallewar (Anil Allewar) for his great tutorial:
+Many thanks to @anilallewar (Anil Allewar) for his great tutorial:
 https://github.com/anilallewar/microservices-basics-spring-boot
 
 https://swagger.io/
