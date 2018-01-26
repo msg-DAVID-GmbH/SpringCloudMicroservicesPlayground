@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @RequestMapping("/brands")
 @RestController
-public class BrandService {
+public class BrandController {
 
     private final BrandRepository brandRepository;
 
-    public BrandService(BrandRepository brandRepository) {
+    public BrandController(BrandRepository brandRepository) {
         this.brandRepository = brandRepository;
     }
 

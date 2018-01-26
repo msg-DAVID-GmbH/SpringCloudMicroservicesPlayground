@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
+import java.util.Optional;
 
 @Repository
 public class BrandRepositoryImpl implements BrandRepository {
@@ -47,7 +48,7 @@ public class BrandRepositoryImpl implements BrandRepository {
     }
 
     @Override
-    public Brand findOne(String brand) {
-        return (Brand) hashOperations.get(KEY, brand);
+    public Optional<Brand> findOne(String brand) {
+        return Optional.ofNullable((Brand) hashOperations.get(KEY, brand));
     }
 }

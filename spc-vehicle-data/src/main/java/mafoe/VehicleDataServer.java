@@ -18,5 +18,6 @@ public class VehicleDataServer {
                 .sources(VehicleDataServer.class)
                 .bannerMode(Banner.Mode.OFF)
                 .profiles("populate-db")
-                .run(args);    }
+                .run(args);
+    }
 }

@@ -30,6 +30,6 @@ public class PrintInfoApplicationListener {
 
         String localServerPort = env.getProperty("local.server.port");
 
-        LOG.info("Access the brand microservice at http://localhost:{}/brand-service/brands", localServerPort);
+        LOG.info("Access the brand microservice at http://localhost:{}/brands", localServerPort);
     }
 }

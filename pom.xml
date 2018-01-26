@@ -56,16 +56,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>mafoe</groupId>
-                <artifactId>spring-boot-server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>com.github.javafaker</groupId>
                 <artifactId>javafaker</artifactId>
                 <version>0.14</version>
             </dependency>
-           <dependency>
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>23.5-jre</version>

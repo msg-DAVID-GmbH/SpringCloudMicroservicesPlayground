@@ -1,20 +1,23 @@
 package mafoe;
 
 import com.github.javafaker.Faker;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import mafoe.entity.Order;
+import mafoe.model.BrandView;
 import mafoe.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * From the spring boot docs:
@@ -31,9 +34,11 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
     private static final Logger LOG = LoggerFactory.getLogger(DatabasePopulatorCLR.class);
 
     private final OrderRepository orderRepository;
+    private final RestTemplate restTemplate;
 
-    public DatabasePopulatorCLR(OrderRepository orderRepository) {
+    public DatabasePopulatorCLR(OrderRepository orderRepository, RestTemplate restTemplate) {
         this.orderRepository = orderRepository;
+        this.restTemplate = restTemplate;
     }
 
     @Transactional
@@ -42,24 +47,33 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
         LOG.info("DatabasePopulatorCLR is trying to populate the database with some test data");
 
         //call the brand webservice
-
-        Multimap<String, String> authorBookMap = HashMultimap.create();
+        ResponseEntity<List<BrandView>> rateResponse =
+                restTemplate.exchange("http://brand-webservice/brands",
+                        HttpMethod.GET, null, new ParameterizedTypeReference<List<BrandView>>() {
+                        });
+        List<BrandView> brands = rateResponse.getBody();
+        LOG.info("Got {} brands from the brand webservice", brands.size());
 
         Faker faker = new Faker();
-        Stream.generate(faker::book).limit(500).forEach(book -> authorBookMap.put(book.author(), book.title()));
 
-        for (Map.Entry<String, Collection<String>> entry : authorBookMap.asMap().entrySet()) {
+        createOrders(brands, faker);
 
-            String authorName = entry.getKey();
-            Collection<String> books = entry.getValue();
+        LOG.info("Created {} orders for {} brands", orderRepository.count(), brands.size());
+    }
 
-            Order order = new Order(authorName);
+    public static void main(String[] args) {
+        new DatabasePopulatorCLR(null, null).createOrders(Arrays.asList(new BrandView()), new Faker());
+    }
+
+    private void createOrders(List<BrandView> brands, Faker faker) {
+
+        IntStream.rangeClosed(1, 100).forEach((numberIdontCareAbout) -> brands.forEach(brand -> {
+
+            Order order = new Order(brand.getName(),
+                    faker.address().country(),
+                    faker.color().name(),
+                    faker.number().numberBetween(2, 5));
             orderRepository.save(order);
-
-            for (String title : books) {
-            }
-        }
-
-        LOG.info("Created {} authors and {} books", orderRepository.count(), bookRepository.count());
+        }));
     }
 }

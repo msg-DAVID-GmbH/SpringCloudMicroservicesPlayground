@@ -1,11 +1,13 @@
 package mafoe.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * JPA entity modeling a person.
+ * JPA entity modeling an order.
  */
+@Table(name = "ORDER_TABLE")
 @Entity
 public class Order extends DemoEntity {
 

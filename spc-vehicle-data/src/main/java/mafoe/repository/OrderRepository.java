@@ -13,5 +13,4 @@ import static javax.transaction.Transactional.TxType.MANDATORY;
 @Transactional(MANDATORY)
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    Order findByName(String name);
 }

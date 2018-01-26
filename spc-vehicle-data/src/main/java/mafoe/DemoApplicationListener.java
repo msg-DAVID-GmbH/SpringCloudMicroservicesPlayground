@@ -28,14 +28,9 @@ public class DemoApplicationListener {
     @EventListener
     public void doStuffWhenServerIsUp(ApplicationReadyEvent applicationReadyEvent) {
 
-        LOG.info("DemoApplicationListener triggered with {}", applicationReadyEvent);
-        LOG.info("Now the server is up and we could fill caches and other stuff");
-
         String localServerPort = env.getProperty("local.server.port");
 
-        LOG.info("Try accessing the HelloController via http://localhost:{}/vehicle-data/ to see a simple webmvc example",
+        LOG.info("See all orders at http://localhost:{}/orders/",
                 localServerPort);
-        LOG.info("Try accessing the Books controller via http://localhost:{}/vehicle-data/books to see a simple Freemarker example " +
-                "displaying data from the database", localServerPort);
     }
 }
