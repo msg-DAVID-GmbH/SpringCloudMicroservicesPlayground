@@ -44,7 +44,7 @@ public class DatabasePopulatorCLR implements CommandLineRunner {
         ClassPathResource cpr = new ClassPathResource("brands.txt");
         List<String> brandNames = Files.readLines(cpr.getFile(), Charsets.UTF_8);
 
-        brandNames.forEach(brandName -> brandRepository.add(new Brand(brandName, new Random().nextBoolean())));
+        brandNames.forEach(brandName -> brandRepository.save(new Brand(brandName, new Random().nextBoolean())));
 
         LOG.info("Created {} brands", brandRepository.count());
     }

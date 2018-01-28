@@ -4,9 +4,7 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.Import;
 
-@Import(EmbeddedRedisConfig.class)
 @EnableEurekaClient
 @SpringBootApplication
 public class BrandWebServiceApplication {

@@ -1,9 +1,12 @@
 package mafoe.brand.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.io.Serializable;
 
 public class Brand implements Serializable {
 
+    @Id
     private String name;
     private boolean isPublic;
 
