@@ -30,7 +30,7 @@ public class DemoApplicationListener {
 
         String localServerPort = env.getProperty("local.server.port");
 
-        LOG.info("See all orders at http://localhost:{}/orders/",
-                localServerPort);
+        LOG.info("See all orders at http://localhost:{}/orders/", localServerPort);
+        LOG.info("See only public orders at http://localhost:{}/orders/public", localServerPort);
     }
 }
